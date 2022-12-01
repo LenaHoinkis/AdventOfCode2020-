@@ -2,12 +2,11 @@ use std::fs;
 use itertools::Itertools;
 
 fn main() {
-    let contents = fs::read_to_string("input.txt");
+    let input = fs::read_to_string("input.txt").unwrap();
     let mut x = 0;
     let mut results = Vec::new();
 
-    let binding = contents.expect("REASON");
-    for line in binding.lines() {
+    for line in input.lines() {
         if !line.is_empty(){
             let num: i32 = line.parse().unwrap();
             x += num
@@ -16,9 +15,11 @@ fn main() {
             x = 0
         }
    }
+   //part1
     let max_value = *results.iter().max().unwrap();
-    println!("{}",max_value);
+    println!("part1: {}",max_value);
 
+    //part2 
     let sorted_values = Vec::from_iter(results.into_iter().sorted().rev().take(3));
-    println!("{}",sorted_values.iter().sum::<i32>());
+    println!("part2: {}",sorted_values.iter().sum::<i32>());
 }
