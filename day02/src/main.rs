@@ -1,9 +1,9 @@
 use std::fs;
 
 enum Shape {
-    Rock,
-    Paper,
-    Scissors,
+    Rock =1,
+    Paper =2,
+    Scissors =3,
 }
 
 
@@ -18,7 +18,7 @@ fn main() {
             results.push((get_shape(c[0]),get_shape(c[2])));
        }
     
-       let calculated_points = results.into_iter().map( | (x,y) | value_of_shape(&y) + points((&x,&y)) ).collect::<Vec<_>>();
+       let calculated_points = results.into_iter().map( | (x,y) |  points((&x,&y)) + y  as i32 ).collect::<Vec<_>>();
        println!("part1: {}",calculated_points.iter().sum::<i32>());
     }
 
@@ -46,11 +46,11 @@ fn points(s: (&Shape,&Shape)) -> i32 {
 fn get_points_new_code(played: char,code: char) -> i32 {
     match code {
         //lose
-        'X' => 0 + value_of_shape(&get_loser(&get_shape(played))),
+        'X' => 0 + get_loser(&get_shape(played)) as i32,
         //draw
-        'Y' => 3 + value_of_shape(&get_shape(played)),
+        'Y' => 3 + get_shape(played) as i32 ,
         //win
-        'Z' => 6 + value_of_shape(&get_winner(&get_shape(played))),
+        'Z' => 6 + get_winner(&get_shape(played))  as i32,
         _  => 0,
       }
 }
@@ -68,15 +68,6 @@ fn get_loser(shape: &Shape) -> Shape {
         Shape::Rock =>  Shape::Scissors,
         Shape::Paper => Shape::Rock,
         Shape::Scissors => Shape::Paper,
-    }
-}
-
- 
-fn value_of_shape(shape: &Shape) -> i32 {
-    match shape {
-        Shape::Rock => 1,
-        Shape::Paper => 2,
-        Shape::Scissors => 3,
     }
 }
 
