@@ -4,7 +4,6 @@ enum Shape {
     Rock,
     Paper,
     Scissors,
-    Unknown,
 }
 
 
@@ -61,7 +60,6 @@ fn get_winner(shape: &Shape) -> Shape {
         Shape::Rock =>  Shape::Paper,
         Shape::Paper => Shape::Scissors,
         Shape::Scissors => Shape::Rock,
-        _  => Shape::Unknown,
     }
 }
 
@@ -70,7 +68,6 @@ fn get_loser(shape: &Shape) -> Shape {
         Shape::Rock =>  Shape::Scissors,
         Shape::Paper => Shape::Rock,
         Shape::Scissors => Shape::Paper,
-        _  => Shape::Unknown,
     }
 }
 
@@ -80,7 +77,6 @@ fn value_of_shape(shape: &Shape) -> i32 {
         Shape::Rock => 1,
         Shape::Paper => 2,
         Shape::Scissors => 3,
-        _ => 0,
     }
 }
 
@@ -89,6 +85,6 @@ fn get_shape(c: char) -> Shape {
         'A'|'X' => Shape::Rock,
         'B'|'Y' => Shape::Paper,
         'C'|'Z' => Shape::Scissors,
-        _  => Shape::Unknown,
+        _ => panic!("INVALID SHAPE"),
       }
 }
