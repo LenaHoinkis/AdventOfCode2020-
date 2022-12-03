@@ -51,22 +51,16 @@ fn char_priority (c:char) -> u32{
     c as u32 - 96
 }
 
-fn part1() -> i32 {
-   return 1
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
     #[test]
     fn calc_uppercase() {
-        //    let imput = "vJrwpWtwJgWrhcsFMMfFFhFp";
             assert_eq!(char_priority('P'), 42);
             assert_eq!(char_priority('L'), 38);
         }
     #[test]
     fn calc_lowercase() {
-        //    let imput = "vJrwpWtwJgWrhcsFMMfFFhFp";
             assert_eq!(char_priority('p'), 16);
             assert_eq!(char_priority('t'), 20);
         }
