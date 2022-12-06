@@ -24,31 +24,30 @@ fn main() {
             stacks[c.0].push(c.1)
         }
     }
-
-
     stacks.iter_mut().for_each(|x| x.reverse());
 
-
     for (i,line) in input.lines().enumerate() {
-        if (i>=start_of_commands+1){
+        if i>=start_of_commands+1{
             // amount, old, new
-            // has bug for 2 digets
             let command:Vec<usize> = line.split_ascii_whitespace()
             .map(|c| c.to_string().parse::<usize>())
             .filter(|c|   !c.is_err())
             .map(|c| c.unwrap())
             .collect();
-
-            println!("({:?})",command);
+/*
+            //part1
             for _ in 0..command[0] {
                 let popped = stacks[command[1]-1].pop();
                 match popped {
                     Some(i) => stacks[command[2]-1].push(i),
                     _ => unreachable!()
-                }  
-            }
-
-        }
+                }
+            }    */
+            //part2 
+            let tail = stacks[command[1]-1].len() - command[0];
+            let mut drained:Vec<_>  = stacks[command[1]-1].drain(tail..).collect();
+            stacks[command[2]-1].append(&mut drained);
+            }   
     }
     println!("({:?})",stacks);
 }
